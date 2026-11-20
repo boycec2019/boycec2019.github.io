@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  figure: CollectionEntry<'projects'>['data']['cover'];
+  wide: boolean;
+}
+
+const { figure, wide } = Astro.props;
+const { image, alt, caption } = figure;
+---
+
+<figure class:list={['flex flex-col overflow-hidden rounded-xl border border-line bg-paper', { 'sm:col-span-2': wide }]}>
+  <div class:list={['grid place-items-center bg-accent-soft p-2.5', { 'sm:aspect-square': !wide }]}>
+    <Image
+      src={image}
+      alt={alt}
+      widths={wide ? [480, 768, 1280] : [320, 480, 640]}
+      sizes={wide ? '(min-width: 64rem) 645px, 95vw' : '(min-width: 64rem) 320px, (min-width: 40rem) 45vw, 90vw'}
+      format="webp"
+      class="max-h-full w-full object-contain"
+    />
+  </div>
+  <figcaption class="flex grow flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-t border-line px-3.5 py-3">
+    <span class="text-sm font-medium text-copy">{caption}</span>
+    <a href={image.src} aria-label={`Full-size image: ${caption}`} class="text-link text-sm">
+      Full-size image
+    </a>
+  </figcaption>
+</figure>

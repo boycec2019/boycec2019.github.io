@@ -1,0 +1,64 @@
+---
+import '@fontsource-variable/geist';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f7f9f6" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-10 focus:rounded-lg focus:bg-paper focus:px-4 focus:py-2"
+    >
+      Skip to content
+    </a>
+    <header class="border-b border-line">
+      <div class="site-width flex h-16 items-center justify-between md:h-[4.5rem]">
+        <a href="/" aria-label="Boyce Chow, home" class="grid size-11 place-items-center rounded-[0.65rem] text-accent-strong">
+          <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 10 9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <path d="M9 21v-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6" />
+          </svg>
+        </a>
+        <nav aria-label="Social profiles" class="flex items-center gap-1">
+          <a
+            href="https://www.linkedin.com/in/boyce-chow-a5ba3436a/"
+            aria-label="LinkedIn"
+            title="LinkedIn"
+            class="grid size-11 place-items-center rounded-lg text-accent hover:bg-accent-soft hover:text-accent-strong"
+          >
+            <svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.45 2H3.54C2.69 2 2 2.67 2 3.5v17c0 .83.69 1.5 1.54 1.5h16.91c.85 0 1.55-.67 1.55-1.5v-17C22 2.67 21.3 2 20.45 2ZM7.93 18.75H4.96V9.21h2.97v9.54ZM6.45 7.9a1.72 1.72 0 1 1 0-3.44 1.72 1.72 0 0 1 0 3.44Zm12.3 10.85h-2.96V14.1c0-1.11-.02-2.54-1.55-2.54-1.56 0-1.8 1.21-1.8 2.46v4.73H9.48V9.21h2.84v1.3h.04a3.12 3.12 0 0 1 2.8-1.54c3 0 3.59 1.98 3.59 4.55v5.23Z" />
+            </svg>
+          </a>
+          <a
+            href="https://github.com/boycec2019"
+            aria-label="GitHub"
+            title="GitHub"
+            class="grid size-11 place-items-center rounded-lg text-accent hover:bg-accent-soft hover:text-accent-strong"
+          >
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.54v-2.06c-3.09.67-3.75-1.31-3.75-1.31-.5-1.28-1.23-1.62-1.23-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15.99 1.7 2.6 1.21 3.24.93.1-.72.39-1.21.71-1.49-2.47-.28-5.07-1.24-5.07-5.49 0-1.22.44-2.21 1.14-2.99-.11-.28-.49-1.41.11-2.94 0 0 .93-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.12-1.44 3.05-1.14 3.05-1.14.6 1.53.22 2.66.11 2.94.71.78 1.14 1.77 1.14 2.99 0 4.26-2.6 5.2-5.08 5.48.4.35.76 1.02.76 2.06v3.03c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z" />
+            </svg>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <slot />
+  </body>
+</html>

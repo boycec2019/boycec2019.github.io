@@ -1,0 +1,69 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Geist Variable', system-ui, sans-serif;
+  --color-canvas: #f7f9f6;
+  --color-paper: #fff;
+  --color-ink: #202b25;
+  --color-copy: #49574e;
+  --color-accent: #42624e;
+  --color-accent-strong: #2e4c39;
+  --color-accent-soft: #e8eee6;
+  --color-line: #dce4da;
+  --color-line-strong: #9cab9e;
+}
+
+@layer base {
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+
+  ::selection {
+    color: var(--color-accent-strong);
+    background: var(--color-accent-soft);
+  }
+}
+
+@layer components {
+  .site-width {
+    width: min(100% - 2.5rem, 70rem);
+    margin-inline: auto;
+  }
+
+  .text-link {
+    @apply font-medium text-accent underline decoration-line-strong underline-offset-4 hover:text-accent-strong hover:decoration-current;
+  }
+
+  .project-art {
+    background-color: #eef2ec;
+    background-image: radial-gradient(#cbd7cb 0.65px, transparent 0.65px);
+    background-size: 12px 12px;
+  }
+
+  .project-copy h2 {
+    @apply text-xl font-semibold tracking-tight;
+  }
+
+  .project-copy h2:not(:first-child) {
+    @apply mt-7;
+  }
+
+  .project-copy p {
+    @apply mt-3 leading-relaxed text-copy;
+  }
+
+  .project-copy a {
+    @apply text-accent underline underline-offset-4;
+  }
+}
+
+@media (min-width: 48rem) {
+  .site-width {
+    width: min(100% - 5rem, 70rem);
+  }
+}

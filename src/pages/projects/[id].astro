@@ -1,0 +1,48 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import ProjectFigure from '../../components/ProjectFigure.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { cover, gallery, title, summary, context } = project.data;
+const { Content } = await render(project);
+const figures = [cover, ...gallery];
+---
+
+<SiteLayout title={`${title} | Boyce Chow`} description={summary}>
+  <main id="main" tabindex="-1" class="site-width pt-7 pb-16 md:pt-9">
+    <a href="/#projects" class="text-link inline-flex min-h-11 items-center">Back to projects</a>
+
+    <header class="mt-4 border-b border-line pb-7">
+      <h1 class="text-4xl leading-tight font-semibold tracking-[-0.06em] sm:text-5xl lg:text-6xl">
+        {title}
+      </h1>
+      <p class="mt-2 font-medium text-accent">{context}</p>
+    </header>
+
+    <div class="mt-7 grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-10">
+      <div class="project-copy"><Content /></div>
+      <section aria-labelledby="project-gallery-title" class="min-w-0">
+        <h2 id="project-gallery-title" class="mb-3 text-xl font-semibold tracking-tight">Design gallery</h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {figures.map((figure, index) => (
+            <ProjectFigure figure={figure} wide={figures.length % 2 === 1 && index === figures.length - 1} />
+          ))}
+        </div>
+      </section>
+    </div>
+  </main>
+</SiteLayout>

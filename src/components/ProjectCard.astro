@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { cover, summary, title } = project.data;
+const titleId = `${project.id}-title`;
+const summaryId = `${project.id}-summary`;
+---
+
+<a
+  href={`/projects/${project.id}/`}
+  aria-labelledby={titleId}
+  aria-describedby={summaryId}
+  class="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-paper shadow-xs hover:border-line-strong"
+>
+  <div class="project-art flex h-48 shrink-0 items-center justify-center overflow-hidden border-b border-line p-4 sm:h-52 lg:h-60">
+    <Image
+      src={cover.image}
+      alt={cover.alt}
+      widths={[240, 360, 480, 640]}
+      sizes="(min-width: 64rem) 280px, (min-width: 40rem) 230px, 75vw"
+      format="webp"
+      class="h-full w-auto max-w-full rounded-sm object-contain shadow-sm"
+    />
+  </div>
+  <div class="px-5 py-5 sm:px-6">
+    <h3 id={titleId} class="text-xl font-semibold tracking-tight group-hover:text-accent group-hover:underline group-hover:underline-offset-4">
+      {title}
+    </h3>
+    <p id={summaryId} class="mt-1.5 text-base leading-relaxed text-copy">{summary}</p>
+  </div>
+</a>
